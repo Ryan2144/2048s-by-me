@@ -718,6 +718,33 @@ hr {
         font-size: 7px;
     }
 }
+.tile.tile-1073741824 .tile-inner {
+    color: #f9f6f2;
+    background: #7f007f;
+    background-image:
+    -moz-linear-gradient(45deg, #990099 25%, transparent 25%),
+    -moz-linear-gradient(-45deg, #990099 25%, transparent 25%),
+    -moz-linear-gradient(45deg, transparent 75%, #990099 75%),
+    -moz-linear-gradient(-45deg, transparent 75%, #990099 75%);
+    background-image:
+    -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.25, #990099), color-stop(.25, transparent)),
+    -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.25, #990099), color-stop(.25, transparent)),
+    -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.75, transparent), color-stop(.75, #990099)),
+    -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.75, transparent), color-stop(.75, #990099));
+    
+    -moz-background-size: 107px 107px;
+    background-size: 107px 107px;
+    -webkit-background-size: 107px 107px;
+    
+    background-position: 0 0, 53.5px 0, 53.5px -53.5px, 0px 53.5px;
+    box-shadow: 0 0 30px 10px #7f007f, inset 0 0 0 1px rgba(255, 255, 255, 0.33333);
+    font-size: 15px;
+}
+@media screen and (max-width: 520px) {
+    .tile.tile-1073741824 .tile-inner {
+        font-size: 7px;
+    }
+}
 .tile.tile-2147483648 .tile-inner {
     color: #f9f6f2;
     background: #7f003f;
