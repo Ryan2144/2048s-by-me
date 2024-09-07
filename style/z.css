@@ -494,10 +494,10 @@ hr {
     color: #FFFFFF;
     background: #000000;
     box-shadow: 0 0 30px 10px #f3d774, inset 0 0 0 1px rgba(255, 255, 255, 0.33333);
-    font-size: 20px; }
+    font-size: 16px; }
     @media screen and (max-width: 520px) {
       .tile.tile-super .tile-inner {
-        font-size: 10px; } }
+        font-size: 7px; } }
 
 @-webkit-keyframes appear {
   0% {
