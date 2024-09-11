@@ -200,7 +200,7 @@ hr {
   right: 0;
   bottom: 0;
   left: 0;
-  background: rgba(238, 228, 218, 0.5);
+  background: rgba(32, 32, 32, 0.5);
   z-index: 100;
   text-align: center;
   -webkit-animation: fade-in 800ms ease 1200ms;
@@ -223,7 +223,7 @@ hr {
 }
 .game-container .game-message a {
   display: inline-block;
-  background: #8f7a66;
+  background: #3a3a3a;
   border-radius: 3px;
   padding: 0 20px;
   text-decoration: none;
@@ -840,6 +840,10 @@ hr {
   margin-right: 5px;
 }
 
+.game-explanation {
+  margin-top: 50px;
+}
+
 @media screen and (max-width: 620px) {
   html, body {
     font-size: 15px;
@@ -893,7 +897,7 @@ hr {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -moz-user-select: none;
-    background: #bbada0;
+    background: #191919;
     border-radius: 6px;
     width: 280px;
     height: 280px;
@@ -909,7 +913,7 @@ hr {
     right: 0;
     bottom: 0;
     left: 0;
-    background: rgba(238, 228, 218, 0.5);
+    background: rgba(32, 32, 32, 0.5);
     z-index: 100;
     text-align: center;
     -webkit-animation: fade-in 800ms ease 1200ms;
@@ -932,7 +936,7 @@ hr {
   }
   .game-container .game-message a {
     display: inline-block;
-    background: #8f7a66;
+    background: #3a3a3a;
     border-radius: 3px;
     padding: 0 20px;
     text-decoration: none;
