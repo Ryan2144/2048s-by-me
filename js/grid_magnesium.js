@@ -131,7 +131,7 @@ Grid.prototype.maxCellMove = function(director) {
 			}
 		}
 	}
-	if (maxCell.value < 512) {
+	if (maxCell.value < 9) {
 		return false;
 	}
 	var map = {
