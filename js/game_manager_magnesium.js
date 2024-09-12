@@ -20,7 +20,7 @@ GameManager.prototype.restart = function () {
   this.setup();
 };
 
-// Keep playing after winning (allows going over 4096)
+// Keep playing after winning (allows going over 2048)
 GameManager.prototype.keepPlaying = function () {
   this.keepPlaying = true;
   this.actuator.continueGame(); // Clear the game won/lost message
@@ -28,7 +28,11 @@ GameManager.prototype.keepPlaying = function () {
 
 // Return true if the game is lost, or has won and the user hasn't kept playing
 GameManager.prototype.isGameTerminated = function () {
-  return this.over || (this.won && !this.keepPlaying);
+  if (this.over || (this.won && !this.keepPlaying)) {
+    return true;
+  } else {
+    return false;
+  }
 };
 
 // Set up the game
@@ -61,147 +65,53 @@ GameManager.prototype.setup = function () {
 // Set up the initial tiles to start the game with
 GameManager.prototype.addStartTiles = function () {
   for (var i = 0; i < this.startTiles; i++) {
-    this.addRandomTile(true);
+    this.addRandomTile();
   }
 };
 
 // Adds a tile in a random position
-// for computing it as simple
-GameManager.prototype.addRandomTile = function (isStart) {
+GameManager.prototype.addRandomTile = function () {
   if (this.grid.cellsAvailable()) {
-  	if (isStart) {
-  		this.addRandomTileHelper(0.9);
-    	
-  	} else {
-  		// compute for my wife
-  		// which position will merge many?
-  		// add which value
-  		// simplest is put 2 or 4 near 2 and 4
-  		if(this.canMergeAlmostMax()) {
-  			return;
-  		}
-  		var cell2 = this.grid.availableContentCell(1);
-  		var cell4 = this.grid.availableContentCell(2);
-  		if (cell2.x === -1 && cell4.x === -1) {
-  			this.addRandomTileHelper(0.5, 1);
-  		} else if (cell2.x === -1) {
-  			var tile = new Tile(cell4, 2);
-  			this.grid.insertTile(tile);
-  		} else if (cell4.x === -1) {
-  			var tile = new Tile(cell2, 1);
-  			this.grid.insertTile(tile);
-  		} else {
-  			var value = Math.random() < 0.5 ? 1 : 2;
-  			if (value === 2) {
-  				var tile = new Tile(cell2, 1);
-  				this.grid.insertTile(tile);
-  			} else {
-  				var tile = new Tile(cell4, 2);
-  				this.grid.insertTile(tile);
-  			}
-  		}
-  	}
+    var self = this;
+    var bvalue = 2147483647;
+    var bcell = this.grid.randomAvailableCell();
+
+    for (var i = 0; i < 8; i++) {
+      var cell = this.grid.randomAvailableCell();
+
+      function check(x, y, dx, dy) {
+        if (x < 0 || y < 0 || x >= self.grid.size || y >= self.grid.size) {
+          return;
+        }
+
+        if (
+          !!self.grid.cells[cell.x + x]
+          && !!self.grid.cells[cell.x + x][cell.y + y]
+        ) {
+          var tocheck = self.grid.cells[cell.x + x][cell.y + y];
+
+          if (Math.random() < 0.8 && tocheck.value < bvalue) {
+            bcell = cell;
+            bvalue = tocheck.value;
+          }
+        } else {
+          check(x + dx, y + dy, dx, dy);
+        }
+      }
+
+      check(1, 0, 1, 0);
+      check(0, 1, 0, 1);
+
+      if (bvalue == 2147483647) {
+        bvalue = 1;
+      }
+    }
+
+    var tile = new Tile(bcell, bvalue);
+
+    this.grid.insertTile(tile);
   }
 };
-
-GameManager.prototype.canMergeAlmostMax = function () {
-	// for sort
-	var cells = [];
-	for (var x = 0; x < this.size; x++) {
-	    for (var y = 0; y < this.size; y++) {
-	    	if(this.grid.cells[x][y]) {
-	    		cells.push({x:x,y:y,val:this.grid.cells[x][y].value});
-	    	}
-	    }
-	}
-	this.grid.sort(cells, -1, cells.length, this.grid.spaceComparor);
-	var vector = [
-		{x:-1,y:-1},
-		{x:-1,y:1},
-		{x:1,y:1},
-		{x:1,y:-1},
-	];
-	for(var i=0; i < cells.length ; i++) {
-		if (cells[i].value < 32){
-			break;
-		}
-		for(var j = 0; j < vector.length; j++) {
-			var tmpcell = {x:cells[i].x+vector[j].x, y:cells[i].y+vector[j].y};
-			if (this.grid.withinBounds(tmpcell) && this.grid.cells[tmpcell.x][tmpcell.y] && this.grid.cells[tmpcell.x][tmpcell.y].value === cells[i].value) {
-				// may be should add tile in tmpcell line.
-				switch(j) {
-					case 0:
-					case 1:
-						var emptyCell1=this.canFindNextEmptyTile(tmpcell.x, tmpcell.y, 1);
-						if (emptyCell1.x != -1) {
-							if(canFindNextEmptyTile(emptyCell.x, emptyCell.y, 1)) {
-								this.addRandomTileHelper(0.9);
-								return true;
-							}
-						}
-						break;
-					case 2:
-					case 3:
-						var emptyCell1=this.canFindNextEmptyTile(tmpcell.x, tmpcell.y, 3);
-						if (emptyCell1.x != -1) {
-							if(canFindNextEmptyTile(emptyCell.x, emptyCell.y, 3)) {
-								this.addRandomTileHelper(0.9);
-								return true;
-							}
-						}
-					default:
-						break;
-				}
-			}
-		}
-	}
-	return false;
-};
-GameManager.prototype.canFindNextEmptyTile = function(x,y, director) {
-	return this.FindNextEmptyTile(x,y,director).x !== -1;
-}
-
-// 0 for up, 1 for right, 2 for down, 3 for left
-GameManager.prototype.FindNextEmptyTile = function(x,y, director) {
-var iterStep = 1;
-	if (director == 0 || director == 3) {
-		iterStep = -1;
-	}
-	var iterKey = x;
-	if (director == 0||director == 2) {
-		iterKey = y;
-	}
-	for (var k = iterKey+iterStep; k >= 0 && k < this.size; k+=iterStep) {
-		if(director == 2||director == 3) {
-			if (!this.grid.cells[x][k]) {
-				return {x:x,y:k};
-			}
-		} else {
-			if (!this.grid.cells[k][y]) {
-				return {x:k,y:y};
-			}
-		}
-	}
-	return {x:-1,y:-1};
-}
-
-GameManager.prototype.addRandomTileHelper = function (rate, t) {
-  		var value = Math.random() < rate ? 1 : 2;
-  		var tile;
-  		var type = 0;
-  		if (t) {
-  			type = t;
-  		}
-  		switch(type) {
-  			case 1:
-  				tile = new Tile(this.grid.availableMaxSpaceCell(), value);
-  				break;
-  			default:
-  				tile = new Tile(this.grid.randomAvailableCell(), value);
-  				break;
-  		}
-		this.grid.insertTile(tile);
-}
 
 // Sends the updated grid to the actuator
 GameManager.prototype.actuate = function () {
@@ -260,12 +170,7 @@ GameManager.prototype.move = function (direction) {
   var self = this;
 
   if (this.isGameTerminated()) return; // Don't do anything if the game's over
-  if (this.grid.maxCellMove(direction)) {
-    var mes=confirm("你确定要移动最大值吗？");
-    if(!mes) {
-      return;
-    }
-  }
+
   var cell, tile;
 
   var vector     = this.getVector(direction);
@@ -299,7 +204,7 @@ GameManager.prototype.move = function (direction) {
           // Update the score
           self.score += Math.pow(2, merged.value);
 
-          // The mighty 12 tile
+          // The mighty Magnesium tile
           if (merged.value === 12) self.won = true;
         } else {
           self.moveTile(tile, positions.farthest);
