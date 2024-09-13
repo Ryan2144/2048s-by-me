@@ -4,7 +4,7 @@ function GameManager(size, InputManager, Actuator, StorageManager) {
   this.storageManager = new StorageManager;
   this.actuator       = new Actuator;
 
-  this.startTiles     = 2;
+  this.startTiles     = startTileCount;
 
   this.inputManager.on("move", this.move.bind(this));
   this.inputManager.on("restart", this.restart.bind(this));
@@ -180,8 +180,11 @@ GameManager.prototype.move = function (direction) {
   });
 
   if (moved) {
-    this.addRandomTile();
-    this.addRandomTile();
+    for (var i = 0; i < tileSpawnCount; ++i) {
+      if (!this.addRandomTile()) {
+        break;
+      }
+    }
 
     if (!this.movesAvailable()) {
       this.over = true; // Game over!
