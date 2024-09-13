@@ -5,6 +5,7 @@ function GameManager(size, InputManager, Actuator, StorageManager) {
   this.actuator       = new Actuator;
 
   this.startTiles     = startTileCount;
+  this.tileSpawnCount = tileSpawnCount;
 
   this.inputManager.on("move", this.move.bind(this));
   this.inputManager.on("restart", this.restart.bind(this));
@@ -180,7 +181,7 @@ GameManager.prototype.move = function (direction) {
   });
 
   if (moved) {
-    for (var i = 0; i < tileSpawnCount; ++i) {
+    for (var i = 0; i < this.tileSpawnCount; ++i) {
       if (!this.addRandomTile()) {
         break;
       }
