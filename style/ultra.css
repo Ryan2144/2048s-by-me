@@ -1,4 +1,4 @@
-/*@import url(fonts/clear-sans.css);*/
+@import url(fonts/clear-sans.css);
 html, body {
   margin: 0;
   padding: 0;
@@ -21,16 +21,6 @@ h1.title {
   margin: 0;
   display: block;
   float: left; }
-  
-button {
-  color: white;
-  background: #bbada0;
-  padding: 15px;
-  border-radius: 15px;
-  font-size: 20px;
-  font-weight: bold;
-  width: 220px;
-}
 
 @-webkit-keyframes move-up {
   0% {
