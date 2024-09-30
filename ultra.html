@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Yet Another 2048 Variant / 2048 Ultra 16x16</title>
+  <title>Yet Another 2048 Variant</title>
 
   <link href="style/ultra.css" rel="stylesheet" type="text/css">
   <link rel="shortcut icon" href="favicon.ico">
@@ -19,7 +19,7 @@
 <body>
   <div class="container">
     <div class="heading">
-      <h1 class="title">Yet Another 2048 Variant / 2048 Ultra 16x16</h1>
+      <h1 class="title">Yet Another 2048 Variant</h1>
       <div class="scores-container">
         <div class="score-container">0</div>
         <div class="best-container">0</div>
@@ -345,8 +345,19 @@
     </p>
     <hr>
     <p>
-    <strong class="important">Warning:</strong> <strong>4 tiles</strong> will be added each move, with a potential of spawning tiles of <strong class="important">any value</strong> that is a power of 2 up to the largest tile; however, larger tiles are <strong>less likely</strong> to spawn than lower ones.
+    <strong class="important">Warning:</strong> There is a chance of spawning tiles of <strong class="important">any value</strong> that is a power of 2 up to the largest tile; however, larger tiles are <strong>less likely</strong> to spawn than lower ones.
     </p>
+    <hr>
+    <p>
+    Key differences from the original 2048:
+    </p>
+    <ul>
+      <li>There is <strong>no tile goal;</strong> the object is to get the highest tile you can</li>
+      <li>The grid is <strong>16x16</strong> instead of 4x4</li>
+      <li><strong>4 tiles</strong> are added each round instead of 1</li>
+      <li>There are more <strong>tile colors</strong> beyond 2048</li>
+      <li>The number of starting tiles are <strong>8 tiles</strong> instead of 2</li>
+    </ul>
     <hr>
     <p>
     Created by <a href="http://gabrielecirulli.com" target="_blank">Gabriele Cirulli.</a> Based on <a href="https://itunes.apple.com/us/app/1024!/id823499224" target="_blank">1024 by Veewo Studio</a> and conceptually similar to <a href="http://asherv.com/threes/" target="_blank">Threes by Asher Vollmer.</a> Modified by <a href="https://github.com/Ryan2144" target="_blank">Ryan2144.</a>
