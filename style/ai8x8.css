@@ -741,29 +741,29 @@ hr {
     color: #f9f6f2;
     background: #2d83b3;
     box-shadow: 0 0 30px 10px rgba(243, 215, 116, 1), inset 0 0 0 1px rgba(255, 255, 255, 0.33333);
-    font-size: 5px; }
+    font-size: 4px; }
   .tile.tile-2251799813685248 .tile-inner {
     color: #f9f6f2;
     background: #2d83b3;
     box-shadow: 0 0 30px 10px rgba(243, 215, 116, 1), inset 0 0 0 1px rgba(255, 255, 255, 0.33333);
-    font-size: 5px; }
+    font-size: 4px; }
   .tile.tile-4503599627370496 .tile-inner {
-    color: #f9f9f2;
-    background: #2d83b3;
-    box-shadow: 0 0 30px 10px rgba(243, 215, 116, 1), inset 0 0 0 1px rgba(255, 255, 255, 0.33333);
-    font-size: 5px; }
-  .tile.tile-9007199254740992 .tile-inner {
-    color: #f9f9f2;
-    background: #2d83b3;
-    box-shadow: 0 0 30px 10px rgba(243, 215, 116, 1), inset 0 0 0 1px rgba(255, 255, 255, 0.33333);
-    font-size: 5px; }
-  .tile.tile-18014398509481984 .tile-inner {
-    color: #f9f9f2;
+    color: #f9f6f2;
     background: #2d83b3;
     box-shadow: 0 0 30px 10px rgba(243, 215, 116, 1), inset 0 0 0 1px rgba(255, 255, 255, 0.33333);
     font-size: 4px; }
+  .tile.tile-9007199254740992 .tile-inner {
+    color: #f9f6f2;
+    background: #2d83b3;
+    box-shadow: 0 0 30px 10px rgba(243, 215, 116, 1), inset 0 0 0 1px rgba(255, 255, 255, 0.33333);
+    font-size: 4px; }
+  .tile.tile-18014398509481984 .tile-inner {
+    color: #f9f6f2;
+    background: #2d83b3;
+    box-shadow: 0 0 30px 10px rgba(243, 215, 116, 1), inset 0 0 0 1px rgba(255, 255, 255, 0.33333);
+    font-size: 3px; }
   .tile.tile-super .tile-inner {
-    color: #f9f9f2;
+    color: #f9f6f2;
     background: #2d83b3;
     box-shadow: 0 0 30px 10px rgba(243, 215, 116, 1), inset 0 0 0 1px rgba(255, 255, 255, 0.33333);
     font-size: 3px; }
